@@ -43,6 +43,7 @@
             <i class="fas fa-edit"></i> Hiệu chỉnh
           </span>
         </router-link>
+        <ContactExtraCard class="mt-2" :contact="activeContact" />
       </div>
     </div>
   </div>
@@ -52,11 +53,13 @@ import ContactCard from "@/components/ContactCard.vue";
 import InputSearch from "@/components/InputSearch.vue";
 import ContactList from "@/components/ContactList.vue";
 import ContactService from "@/services/contact.service";
+import ContactExtraCard from "@/components/ContactExtraCard.vue";
 export default {
   components: {
     ContactCard,
     InputSearch,
     ContactList,
+    ContactExtraCard,
   },
   data() {
     return {
@@ -120,6 +123,21 @@ export default {
   },
   mounted() {
     this.refreshList();
+  },
+  tinhTrangLabel(code) {
+    const map = {
+      doc_than: "Độc thân",
+      gia_dinh: "Có gia đình",
+    };
+    return map[code] || "Không rõ";
+  },
+  soThichLabel(code) {
+    const map = {
+      danh_cau: "Đánh cầu",
+      nghe_nhac: "Nghe nhạc",
+      choi_game: "Chơi game",
+    };
+    return map[code] || code;
   },
 };
 </script>
